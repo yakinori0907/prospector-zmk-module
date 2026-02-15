@@ -2278,7 +2278,8 @@ static void ss_bootloader_btn_event_cb(lv_event_t *e) {
     if (code == LV_EVENT_CLICKED || code == LV_EVENT_SHORT_CLICKED) {
         LOG_INF("Bootloader button ACTIVATED - entering bootloader mode");
         /* Use Zephyr 4.x RETENTION_BOOT_MODE API for bootloader entry */
-        int ret = bootmode_set(BOOT_MODE_TYPE_BOOTLOADER);
+        // int ret = bootmode_set(BOOT_MODE_TYPE_BOOTLOADER);
+        int ret = sys_reboot(SYS_REBOOT_WARM);
         if (ret < 0) {
             LOG_ERR("Failed to set bootloader mode: %d", ret);
             return;
